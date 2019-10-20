@@ -18,11 +18,16 @@ public class TestSort
         System.out.println("\n\nInsertion sort comparison counter: " + sortTest.compIS);
         System.out.println("Quicksort comparison counter: " + sortTest.compQS);
         
-        /** Read in test datat into array **/
-        sortTest.readIn("test1.txt");
+        /** Read in test data into array **/
+        sortTest.readIn("src/app/test1.txt");
         
         /** Display array **/
         sortTest.display(15,"Values in test1.txt");
+
+        sortTest.insertion();
+        sortTest.display(15, "Insertion sorted");
+
+        
     }
     
 } /** End of TestSort class **/

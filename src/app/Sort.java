@@ -13,25 +13,24 @@ import java.util.*;
 
 public class Sort {
 
-/** Size of array **/
-private int size;
+  /** Size of array **/
+  private int size;
 
-/** Number of used elements in array **/
-private int usedSize;
+  /** Number of used elements in array **/
+  private int usedSize;
 
-/** Array of integers **/
-private int[] A;
+  /** Array of integers **/
+  private int[] A;
 
-/** Global variables for counting sort comparisons **/
-public int compIS; /** Global comparison count for Insertion Sort **/
-public int compQS; /** Global comparison count for Quicksort **/
-public int compNS; /** Global comparison count for newsort **/
+  /** Global variables for counting sort comparisons **/
+  public int compIS; /** Global comparison count for Insertion Sort **/
+  public int compQS; /** Global comparison count for Quicksort **/
+  public int compNS; /** Global comparison count for newsort **/
 
-/*****************/
-/** Constructor **/
-/*****************/
-Sort(int max)
-{
+  /*****************/
+  /** Constructor **/
+  /*****************/
+  Sort(int max) {
     /** Initialiase global sort count variables **/
     compIS = 0;
     compQS = 0;
@@ -43,42 +42,47 @@ Sort(int max)
     
     /** Create Array of Integers **/
     A = new int[size];
-}
+  }
 
-/*********************************************/
-/*** Read a file of integers into an array ***/
-/*********************************************/
-public void readIn(String file)
-{
-   try
-   {
-       /** Initialise loop variable **/
-       usedSize = 0;
-       
-       /** Set up file for reading **/
-       FileReader reader = new FileReader(file);
-       Scanner in = new Scanner(reader);
-       
-       /** Loop round reading in data while array not full **/
-       while(in.hasNextInt() && (usedSize < size))
-       {
-           A[usedSize] = in.nextInt();
-           usedSize++;
-       }
-       
+  public void insertion() {
+    int i,j,key;
+    for(i=1; i < usedSize; i++) {
+      key = A[i];
+      j = i;
+      while(j>0 && key < A[j-1]) {
+        A[j] = A[j-1];
+        j--;
+      }
+      A[j] = key;
     }
-    catch (IOException e)
-    {
-       System.out.println("Error processing file " + file);
-    }
-   
-}
+  }
 
-/**********************/
-/*** Display array  ***/
-/**********************/
-public void display(int line, String header)
-{
+  /*********************************************/
+  /*** Read a file of integers into an array ***/
+  /*********************************************/
+  public void readIn(String file) {
+    try {
+      /** Initialise loop variable **/
+      usedSize = 0;
+      
+      /** Set up file for reading **/
+      FileReader reader = new FileReader(file);
+      Scanner in = new Scanner(reader);
+      
+      /** Loop round reading in data while array not full **/
+      while(in.hasNextInt() && (usedSize < size)) {
+        A[usedSize] = in.nextInt();
+        usedSize++;
+      }  
+    } catch (IOException e) {
+      System.out.println("Error processing file " + file);
+    }
+  }
+
+  /**********************/
+  /*** Display array  ***/
+  /**********************/
+  public void display(int line, String header) {
     /*** Integer Formatter - three digits ***/
     NumberFormat FI = NumberFormat.getInstance();
     FI.setMinimumIntegerDigits(3);
@@ -87,17 +91,14 @@ public void display(int line, String header)
     System.out.print("\n"+header);
 
     /** Display array data **/
-    for (int i=0;i<usedSize;i++)
-    {
-        /** Check if new line is needed **/
-        if (i%line == 0) 
-        { 
-            System.out.println(); 
-        }
-        
-        /** Display an array element **/
-        System.out.print(FI.format(A[i])+" ");
-    }
-}
+    for (int i=0;i<usedSize;i++) {
+      /** Check if new line is needed **/
+      if (i%line == 0) { 
+          System.out.println(); 
+      }
 
-}  /** End of Sort Class **/
+      /** Display an array element **/
+      System.out.print(FI.format(A[i])+" ");
+    }
+  }
+}
