@@ -23,18 +23,14 @@ public class Sort {
   private int[] A;
 
   /** Global variables for counting sort comparisons **/
-  public int compIS; /** Global comparison count for Insertion Sort **/
-  public int compQS; /** Global comparison count for Quicksort **/
-  public int compNS; /** Global comparison count for newsort **/
+  public int comp; /** Global comparison count for any Sort **/
 
   /*****************/
   /** Constructor **/
   /*****************/
   Sort(int max) {
     /** Initialiase global sort count variables **/
-    compIS = 0;
-    compQS = 0;
-    compNS = 0;
+    comp = 0;
     
     /** Initialise size variables **/
     usedSize = 0;
@@ -44,6 +40,16 @@ public class Sort {
     A = new int[size];
   }
 
+  public void sort(int alg) {
+    if(alg==0) insertion();
+    if(alg==1) quicksort(0, usedSize-1);
+    if(alg==2) newsort();
+  }
+
+  ////////////////////
+  // Insertion sort //
+  ////////////////////
+
   public void insertion() {
     int i,j,key;
     for(i=1; i < usedSize; i++) {
@@ -51,10 +57,81 @@ public class Sort {
       j = i;
       while(j>0 && key < A[j-1]) {
         A[j] = A[j-1];
+        comp++;
         j--;
       }
+      comp++;
       A[j] = key;
     }
+  }
+ 
+  ///////////////
+  // Quicksort //
+  ///////////////
+
+  public void quicksort(int L, int R) {
+    if(R>L) {
+      int p = partition(L, R);
+      quicksort(L, p-1);
+      quicksort(p+1, R);
+    }
+  }
+
+  private int partition(int L, int R) {
+    int v = A[R];
+    int pL = L;
+    int pR = R;
+    while(pL < pR) {
+      while(A[pL] < v) {
+        pL++;
+        comp++;
+      }
+      comp++;
+      while(A[pR] >= v && pR > L) {
+        pR--;
+        comp++;
+      }
+      comp++;
+      if(pL < pR) swap(pL, pR);
+    } 
+    swap(pL, R);
+    return pL;
+  }
+
+  private void swap(int a, int b) {
+    int temp = A[a];
+    A[a] = A[b];
+    A[b] = temp;
+  }
+
+  /////////////
+  // newsort //
+  /////////////
+
+  public void newsort() {
+    int pos = 0;
+    while(pos<usedSize) {
+      int min = findMinFrom(pos);
+      for(int i=pos; i<usedSize; i++) {
+        if(A[i]==min) {
+          swap(i, pos);
+          pos++;
+        }
+        comp++;
+      }
+    }
+  }
+
+  public int findMinFrom(int pos) {
+    int min = A[pos];
+    // comp++;
+    for(int i=pos+1; i<usedSize; i++) {
+      if(A[i]<min) {
+        min=A[i];
+      }
+      comp++;
+    }
+    return min;
   }
 
   /*********************************************/
