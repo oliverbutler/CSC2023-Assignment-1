@@ -42,7 +42,7 @@ public class Sort {
 
   public void sort(int alg) {
     if(alg==0) insertion();
-    if(alg==1) quicksort(0, usedSize-1);
+    if(alg==1) quicksort(0, usedSize-1); // Quick sorts initial parameters
     if(alg==2) newsort();
   }
 
