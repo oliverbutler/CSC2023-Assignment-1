@@ -20,7 +20,7 @@ public class TestSort {
         Sort sortTest; // Initialize sort
         if(test<3) sortTest = new Sort(50); // First 3 tests are 50 long
         else sortTest = new Sort(1000); // Last 3 tests are 1000 long
-        sortTest.readIn("src/app/test" + (test+1) + ".txt"); // Read in the test
+        sortTest.readIn("src/test" + (test+1) + ".txt"); // Read in the test
         if(test==0) { // For the first test print the necessary info
           System.out.println("\n\n-======================[Algorithm " + (alg+1) + "]======================-");
           sortTest.display(15, "Unsorted:");
