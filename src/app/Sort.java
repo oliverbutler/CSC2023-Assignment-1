@@ -4,7 +4,7 @@
 /*** methods for implementing sorting algorithms   ***/
 /***                                               ***/
 /***     Initial Author: Jason Steggles 20/09/19   ***/
-/***     Extended by: ?                            ***/
+/***     Extended by: Oliver Butler                ***/
 /*****************************************************/
 
 import java.io.*;
@@ -41,6 +41,7 @@ public class Sort {
   }
 
   public void sort(int alg) {
+    comp = 0;
     if(alg==0) insertion();
     if(alg==1) quicksort(0, usedSize-1); // Quick sorts initial parameters
     if(alg==2) newsort();
